@@ -1,14 +1,7 @@
-from typing import Union
+nums = int(input('pls enter nums: '))
+count = 0
+for i in str(nums):
+    count += int(i)
 
-def whu_is_the_best(user_info: str) -> Union[str, None]:
+print(count)
 
-    if user_info.lower() == 'вова':
-       return 'лучший'
-
-    return 'введите Вова'
-
-
-
-user_input = input()
-
-print(whu_is_the_best(user_input))
