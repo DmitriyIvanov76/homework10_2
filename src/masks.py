@@ -3,12 +3,7 @@ def get_mask_card_number(number_cart: str) -> str:
     """функция принимает на вход номера карты, а возвращает номер с несколькими цифрами закрытыми звездочкой"""
 
     if len(number_cart) == 16 and number_cart.isdigit():
-        number_cart_list = list(number_cart)
-        number_cart_list[6:12] = "*" * 6
-        number_cart_list.insert(4, " ")
-        number_cart_list.insert(9, " ")
-        number_cart_list.insert(14, " ")
-        return "".join(number_cart_list)
+        return f'{number_cart[0:4]} {number_cart[5:7]}** **** {number_cart[-4:]}'
     else:
         print("Please enter the correct card number")
         return ""
