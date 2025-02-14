@@ -44,7 +44,7 @@ def mask_account_card(user_input: str) -> Union[str, None]:
         else:
             return None
 
-    # я устал исправлять ошибки mypy...
+
     return None
 
 
