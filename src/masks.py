@@ -5,8 +5,7 @@ def get_mask_card_number(number_cart: str) -> str:
     if len(number_cart) == 16 and number_cart.isdigit():
         return f'{number_cart[0:4]} {number_cart[5:7]}** **** {number_cart[-4:]}'
     else:
-        print("Please enter the correct card number")
-        return ""
+        raise ValueError('Ошибка ввода номера карты')
 
 
 def get_mask_account(number_account: str) -> str:
@@ -16,5 +15,10 @@ def get_mask_account(number_account: str) -> str:
         coded_account_number = "**" + number_account[-4:]
         return coded_account_number
     else:
-        print("Please enter the correct account number")
-        return ""
+        raise ValueError('ошибка ввода номера счета')
+
+
+
+
+
+
