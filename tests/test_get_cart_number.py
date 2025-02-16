@@ -9,6 +9,10 @@ import pytest
 def test_get_cart_number(num, res):
     assert get_mask_card_number(num) == res
 
+# тестирование с помощью фикстур
+def test_get_cart_number_fixture(cart_number_fixture):
+    assert get_mask_card_number(cart_number_fixture) == '1234 67** **** 6666'
+
 # вызываем ошибку подавая на вход не верную длину карты
 def test_get_mask_number_bad():
     with pytest.raises(ValueError):

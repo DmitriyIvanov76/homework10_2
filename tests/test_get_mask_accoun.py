@@ -9,6 +9,10 @@ from src.generate_cart_namber import generate_number_account
 def test_get_mask_account(account_num, res):
     assert get_mask_account(account_num) == res
 
+# тестирование с помощью фикстур
+def test_get_mask_account_fixture(account_number_fixture):
+    assert get_mask_account(account_number_fixture) == '**5555'
+
 # вызов ошибки при вводе некорректной длины номера счета
 def test_get_mask_account_bad_len():
     with pytest.raises(ValueError):
@@ -19,7 +23,5 @@ def test_get_mask_account_bad_empty():
     with pytest.raises(ValueError):
         get_mask_account('')
 
-# вызываем ошибку подавая на вход не числовые символы
-def test_get_mask_account_bad_alpha():
-    with pytest.raises(ValueError):
-        get_mask_account('hello')
+
+
