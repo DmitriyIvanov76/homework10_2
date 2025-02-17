@@ -2,11 +2,15 @@ import datetime
 import re
 from typing import Union
 
-from masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(user_input: str) -> Union[str, None]:
+def mask_account_cart(user_input: str) -> Union[str, None]:
     """функция маскирует номер карты"""
+    # проверка на пустой ввод
+    if len(user_input) < 1:
+        raise TypeError("вы ничего не ввели")
+
     # если пользователь ввел карту
     if re.search("[a-zA-Z]", user_input):
 
@@ -15,14 +19,14 @@ def mask_account_card(user_input: str) -> Union[str, None]:
         if type_cart:
             split_type_cart = type_cart.group().strip()
         else:
-            return None
+            raise ValueError("введено неверное значение")
 
         # отделяем номер карты от типа
         number_cart = re.search(r"\d+", user_input)
         if number_cart:
             split_number_cart = number_cart.group().strip()
         else:
-            return None
+            raise ValueError("введено неверное значение")
 
         return f"{split_type_cart} {get_mask_card_number(split_number_cart)}"
 
@@ -34,7 +38,7 @@ def mask_account_card(user_input: str) -> Union[str, None]:
         if account_input:
             split_account = account_input.group().strip()
         else:
-            return None
+            raise ValueError("введено неверное значение")
 
         # отделяем номер от счета
         account_number = re.search(r"\d+", user_input)
@@ -42,16 +46,20 @@ def mask_account_card(user_input: str) -> Union[str, None]:
             split_account_number = account_number.group().strip()
             return f"{split_account} {get_mask_account(split_account_number)}"
         else:
-            return None
+            raise ValueError("введено неверное значение")
 
-
-    return None
-
-
-print(mask_account_card("Visa Platinum 8990922113665229"))
+    else:
+        return None
 
 
 def get_date(my_date: str) -> str:
     """функция приводит введенную дату к формату ДД.ММ.ГГГГ"""
-    date_obj = datetime.datetime.strptime(my_date, "%Y-%m-%dT%H:%M:%S.%f")
+    # проверяем на пустое значение
+    if len(my_date) != 26:
+        raise ValueError("введена неверная дата")
+    try:
+        date_obj = datetime.datetime.strptime(my_date, "%Y-%m-%dT%H:%M:%S.%f")
+    except ValueError:
+        raise ValueError("введен неверный формат даты")
+
     return date_obj.strftime("%d.%m.%Y")
