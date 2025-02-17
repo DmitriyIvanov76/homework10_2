@@ -3,7 +3,7 @@ from src.generate_cart_namber import generate_number
 import pytest
 
 # добавляем в параметризацию функцию генерации номеров карт и их маскировки
-@pytest.mark.parametrize('num, res', generate_number(10, 16))
+@pytest.mark.parametrize('num, res', generate_number(20, 16))
 
 # с помощью параметризации и функции генерации подаем на вход номер карты, проверяем значение на выходе
 def test_get_cart_number(num, res):

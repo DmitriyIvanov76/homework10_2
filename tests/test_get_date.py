@@ -24,7 +24,7 @@ def test_get_date_bad_empty():
     with pytest.raises(ValueError):
         get_date('')
 
-# вызываем ошибку при неверной длине введенных данных
+# вызываем ошибку при неверной длине пвведенных данных
 def test_get_date_bad_len():
     with pytest.raises(ValueError):
         get_date('2024-03-11T02:26:18.6714')
