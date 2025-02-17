@@ -17,3 +17,10 @@ def mask_account_cart_fixture():
 @pytest.fixture
 def get_date_fixture():
     return '2024-03-11T02:26:18.671407'
+
+@pytest.fixture
+def filter_by_state_fixture():
+    return
+
+
+
