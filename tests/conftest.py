@@ -19,6 +19,11 @@ def get_date_fixture():
     return '2024-03-11T02:26:18.671407'
 
 @pytest.fixture
+def get_filter_by_state_canceled():
+    return 'CANCELED'
+
+
+@pytest.fixture
 def filter_by_state_fixture():
     return
 
