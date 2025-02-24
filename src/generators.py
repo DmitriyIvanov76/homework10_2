@@ -111,9 +111,17 @@ def transaction_descriptions(transactions: list[dict]) -> iter :
         yield i
 
 def card_number_generator(start: int, stop: int) -> iter:
-    generator_nums = ([0 for i in range(4)] for j in range(4))
+
+    # проверка входных данных
+    if not isinstance(start, int) or not isinstance(stop, int):
+        raise TypeError('введен не верный тип данных')
+    if start >= stop:
+        raise ValueError('неверное значение')
+    # генерация номера карты и вывод согласно формату
+    for num in range(start, stop):
+        yield f'{num:016d}'[:4] + ' ' + f'{num:016d}'[4:8] + ' ' + f'{num:016d}'[8:12] + ' ' + f'{num:016d}'[12:]
 
 
-for card_number in card_number_generator(1, 5):
+for card_number in card_number_generator(4, 7):
     print(card_number)
 
