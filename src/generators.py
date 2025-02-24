@@ -1,4 +1,3 @@
-import random
 
 prime = (
     [
@@ -58,7 +57,7 @@ prime = (
                     "code": "USD"
                 }
             },
-            "Перевод с карты на карту": "Перевод с карты на карту",
+            "description": "Перевод с карты на карту",
             "from": "Visa Classic 6831982476737658",
             "to": "Visa Platinum 8990922113665229"
         },
@@ -80,7 +79,7 @@ prime = (
     ]
 )
 
-def filter_by_currency(transactions: list[dict], currency: str) -> iter:
+def filter_by_currency(transactions: list[dict[str, any]], currency: str) -> iter:
     """функция возвращает итератор, который поочередно выдает транзакции,
      где валюта операции соответствует заданной"""
 
@@ -102,15 +101,26 @@ def filter_by_currency(transactions: list[dict], currency: str) -> iter:
     return filter(lambda x: x['operationAmount']['currency']['code'] == currency, transactions)
 
 
-def transaction_descriptions(transactions: list[dict]) -> iter :
+def transaction_descriptions(transactions: list[dict[str, any]]) -> str :
     """функция принимает список словарей с транзакциями
      и возвращает описание каждой операции по очереди"""
 
+    # проверка входных данных
+    if not isinstance(transactions, list):
+        raise TypeError('Введено неверное значение')
+    for i in transactions:
+        if not any('description' in i for i in transactions):
+            raise ValueError('В списке отсутствует искомое значение')
+
+    # получение нужного значения в словаре и вывод результата
     result = (i.get('description', '\033[31mзначение не найдено\033[0m') for i in transactions)
     for i in result:
         yield i
 
+
+
 def card_number_generator(start: int, stop: int) -> iter:
+    """Генерирует номера банковских карт согласно заданным значениям"""
 
     # проверка входных данных
     if not isinstance(start, int) or not isinstance(stop, int):
@@ -122,6 +132,4 @@ def card_number_generator(start: int, stop: int) -> iter:
         yield f'{num:016d}'[:4] + ' ' + f'{num:016d}'[4:8] + ' ' + f'{num:016d}'[8:12] + ' ' + f'{num:016d}'[12:]
 
 
-for card_number in card_number_generator(4, 7):
-    print(card_number)
 
