@@ -26,6 +26,7 @@ isort = "^5.13.2"
 pytest = "^8.3.4"
 pytest-cov = "^6.0.0"
 requests = "^2.32.3"
+python-dotenv = "^1.0.1"
 
 [tool.black]
 # Максимальная длина строки
