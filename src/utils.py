@@ -8,21 +8,25 @@ def convertor_json(path: str) -> list[dict]:
     json, возвращает список словарей"""
 
     # настройка логгера для модуля
-    logger = logging.getLogger("utils")
-    logger.setLevel(logging.DEBUG)
-    file_handler = logging.FileHandler("logs/utils.log", mode="w", encoding="UTF-8")
-    file_formater = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
-    file_handler.setFormatter(file_formater)
-    logger.addHandler(file_handler)
+    logging.basicConfig(
+        filename='logs/utils.log',
+        filemode='w',
+        encoding='UTF-8',
+        format='%(asctime)s - %(name)s - %(levelname)s: %(message)s',
+        level=logging.DEBUG,
+    )
+
+    logger = logging.getLogger('utils')
+
     try:
-        logger.info("Начало работы")
-        with open(path, encoding="UTF-8") as file:
+        logger.info('Начало работы')
+        with open(path, encoding='UTF-8') as file:
             content = json.load(file)
-            logger.info("вывод результата")
+            logger.info('вывод результата')
             return content
     except FileNotFoundError:
-        logger.error("Файл по указанному пути - отсутствует")
+        logger.error('Файл по указанному пути - отсутствует')
         return []
     except JSONDecodeError:
-        logger.error("Файл не содержит информации для обработки")
+        logger.error('Файл не содержит информации для обработки')
         return []
