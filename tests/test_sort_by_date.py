@@ -20,10 +20,10 @@ def test_sort_by_date_identical(list_dict_for_sorted_date, correct_answer_identi
 
 # вызываем ошибку подав неверный формат даты
 def test_sort_by_date_error(list_dict_for_sorted_date):
-    with pytest.raises(TypeError):
-        sort_by_date(list_dict_for_sorted_date[1])
+    with pytest.raises(ValueError):
+        sort_by_date(list_dict_for_sorted_date)
 
 
 def test_sort_by_date_second_error(list_dict_for_sorted_date):
-    with pytest.raises(TypeError):
-        sort_by_date(list_dict_for_sorted_date[2])
+    with pytest.raises(ValueError):
+        sort_by_date(list_dict_for_sorted_date)

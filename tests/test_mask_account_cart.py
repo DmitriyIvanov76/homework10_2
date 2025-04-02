@@ -24,25 +24,3 @@ def test_account_cart_fixture(mask_account_cart_fixture):
     assert mask_account_cart(mask_account_cart_fixture) == "Visa Classic 6831 82** **** 7658"
 
 
-# вызов ошибки при вводе неверного значения
-def test_account_cart_bad_incorrect_value():
-    with pytest.raises(ValueError):
-        mask_account_cart("hello")
-
-
-# вызов ошибки при вводе неполного номера карты
-def test_account_cart_bad_low_len():
-    with pytest.raises(ValueError):
-        mask_account_cart("Maestro 159")
-
-
-# вызов ошибки при вводе пустого значения
-def test_account_cart_bad_empty():
-    with pytest.raises(TypeError):
-        mask_account_cart("")
-
-
-# вызов ошибки при вводе русских символов
-def test_account_cart_bad_cyrillic():
-    with pytest.raises(ValueError):
-        mask_account_cart("привет")

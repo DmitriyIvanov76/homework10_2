@@ -1,34 +1,35 @@
 import datetime
 import re
-from typing import Union
+
 
 from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_cart(user_input: str) -> Union[str, None]:
+def mask_account_cart(user_input: str) -> [str | None]:
     """функция маскирует номер карты"""
     # проверка на пустой ввод
     if len(user_input) < 1:
         raise TypeError("вы ничего не ввели")
 
     # если пользователь ввел карту
-    if re.search("[a-zA-Z]", user_input):
+    if re.search("[a-zA-ZМИР]", user_input):
 
         # отделяем тип карты от номера
-        type_cart = re.search("[a-z A-Z]+", user_input)
+        type_cart = re.search("[a-zA-ZМИР]+", user_input)
         if type_cart:
             split_type_cart = type_cart.group().strip()
         else:
             raise ValueError("введено неверное значение")
 
         # отделяем номер карты от типа
-        number_cart = re.search(r"\d+", user_input)
-        if number_cart:
-            split_number_cart = number_cart.group().strip()
-        else:
-            raise ValueError("введено неверное значение")
+        split_number_cart = user_input.rsplit(' ', 1)
+        # number_cart = re.search(r"\d+", user_input)
+        # if number_cart:
+        #     split_number_cart = number_cart.group().strip()
+        # else:
+        #     raise ValueError("введено неверное значение")
 
-        return f"{split_type_cart} {get_mask_card_number(split_number_cart)}"
+        return f"{split_number_cart[0]} {get_mask_card_number(split_number_cart[1])}"
 
     # если пользователь ввел счет
     elif re.search("[а-яА-Я]", user_input):

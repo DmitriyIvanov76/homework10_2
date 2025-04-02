@@ -16,11 +16,11 @@ def gen_transaction() -> Generator[dict]:
         yield content_random
 
 
-# API выведен из глобальной области видимости
-if __name__ == "__main__":
-    transaction = next(gen_transaction())
-    load_dotenv()
-    API_KEY = os.getenv("API_KEY")
+
+
+transaction = next(gen_transaction())
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 
 def sum_transaction(trans: dict[str, Any]) -> float:
@@ -35,3 +35,5 @@ def sum_transaction(trans: dict[str, Any]) -> float:
         if response.status_code != 200:
             print("Нет соединения с сервером")
         return response.json()["result"]
+
+

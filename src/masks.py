@@ -1,5 +1,6 @@
 import logging
 
+
 # настройка логгера для модуля
 logger = logging.getLogger("masks")
 logger.setLevel(logging.DEBUG)
@@ -18,8 +19,8 @@ def get_mask_card_number(number_cart: str) -> str:
         return f"{number_cart[0:4]} {number_cart[5:7]}** **** {number_cart[-4:]}"
 
     else:
-        logger.error("номер карты не соответствует заданной длине")
-        raise ValueError("Ошибка ввода номера карты")
+        return 'неверный номер карты'
+
 
 
 def get_mask_account(number_account: str) -> str:
@@ -31,5 +32,5 @@ def get_mask_account(number_account: str) -> str:
         coded_account_number = "**" + number_account[-4:]
         return coded_account_number
     else:
-        logger.error("Ошибка ввода номера счета")
-        raise ValueError("ошибка ввода номера счета")
+        return 'неверный номер счета'
+
